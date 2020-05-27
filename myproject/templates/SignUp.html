@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com -->
+  <title>Login Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+  </head>
+  <body>
+    {% extends "Base.html" %}
+    {% block nav %}
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('.login') }}"> Login </a>
+            </li>
+        </ul>
+    {% endblock %}
+    {% block content %}
+    <style>
+   .register{
+      background: -webkit-linear-gradient(left, #2cab49, #00c6ff);
+      margin-top: 6%;
+      padding: 3%;
+  }
+  .register-left{
+    text-align: center;
+    color: #fff;
+    margin-top: 4%;
+  }
+  .register-left input{
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    width: 60%;
+    background: #f8f9fa;
+    font-weight: bold;
+    color: #383d41;
+    margin-top: 30%;
+    margin-bottom: 3%;
+    cursor: pointer;
+  }
+  .register-right{
+    background: #f8f9fa;
+    border-top-left-radius: 10% 50%;
+    border-bottom-left-radius: 10% 50%;
+  }
+  .register-left img{
+      margin-top: 15%;
+      margin-bottom: 5%;
+      width: 60%;
+
+  }
+  @-webkit-keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+  }
+  @keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+  }
+  .register-left p{
+    font-weight: lighter;
+    padding: 12%;
+    margin-top: -9%;
+  }
+  .register .register-form{
+    padding: 10%;
+    margin-top: 2%;
+    margin-left: 20%;
+  }
+  .register .register-form1{
+    padding: 10%;
+    margin-top: 10%;
+    margin-left: 16%;
+  }
+  .btnRegister{
+    float: right;
+    margin-top: 10%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #0062cc;
+    color: #fff;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+  }
+  .register .nav-tabs{
+    margin-top: 3%;
+    border: none;
+    background: #0062cc;
+    border-radius: 1.5rem;
+    width: 28%;
+    float: right;
+  }
+  .register .nav-tabs .nav-link{
+    padding: 2%;
+    height: 34px;
+    font-weight: 600;
+    color: #fff;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+  }
+  .register .nav-tabs .nav-link:hover{
+    border: none;
+  }
+  .register .nav-tabs .nav-link.active{
+    width: 100px;
+    color: #0062cc;
+    border: 2px solid #0062cc;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+  }
+  .register-heading{
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: -15%;
+    color: #495057;
+  }
+      </style>
+      <div class="container register">
+                  <div class="row">
+                    <div class="col-md-3 register-left">
+                      <i class="fas fa-user-circle fa-10x" style="height:200px"></i>
+                      <h2>Welcome</h2>
+                    </div>
+                      <div class="col-md-9 register-right">
+                          <div class="tab-content" id="myTabContent">
+                              <div>
+                                {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+
+                                  <div class="row flashes justify-content-md-center mt-5">
+                                    {% for message in messages %}
+                                      <h6 style="color:red;">{{ message }}</h6>
+                                      <br>
+                                    {% endfor %}
+                                  {% endif %}
+                                    </div>
+                                  {% endwith %}
+                                  <h3  class="register-heading"><u>Signup Page</u></h3>
+                                  <div class="row register-form1">
+                                      <form  method="post">
+                                        <div class="row">
+
+
+                                        {{form.hidden_tag()}}
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{form.fullname(placeholder="Full Name",required=True)}}
+                                            </div>
+
+                                            <div class="form-group">
+                                              {{form.email(placeholder="Email",required=True)}}
+                                              {% if form.email.errors %}
+                                                <ul class="errors">
+                                                  {% for error in form.email.errors %}
+                                                    <li>{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                            </div>
+                                            <div class="form-group">
+                                                {{form.phone_no(placeholder="Phone Number",required=True)}}
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{form.pwd(placeholder="Password",required=True)}}
+                                                {% if form.pwd.errors %}
+                                                  <ul class="errors">
+                                                  	{% for error in form.pwd.errors %}
+                                                  		<li>{{ error }}</li>
+                                                      {% endfor %}
+                                                  </ul>
+                                              {% endif %}
+
+                                            </div>
+                                            <div class="form-group">
+                                                {{form.conf_pwd(placeholder="Confirm Password",required=True)}}
+
+                                            </div>
+                                            <div class="form-group">
+                                              {{form.country(style="width:180px;height:30px;",required=True)}}
+
+                                            </div>
+                                            {{form.submit(class="btnRegister")}}
+
+                                        </div>
+                                        </div>
+                                    </form>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+{% endblock %}
+  </body>
+</html>
