@@ -43,7 +43,7 @@
 						<td  style="text-align:right;">₹ {{ price }}</td>
 						<td  style="text-align:right;">₹ {{ item_price }}</td>
 						<td style="text-align:center;">
-							<a href="{{ url_for('.delete_product', code=session['cart_item'][key]['id']) }}" class="btnRemoveAction">
+							<a href="{{ url_for('.delete_product', pid=session['cart_item'][key]['id']) }}" class="btnRemoveAction">
 								<img src="/static/images/icon-delete.png" alt="Remove Item" />
 							</a>
 						</td>
