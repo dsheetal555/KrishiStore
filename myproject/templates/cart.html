@@ -5,6 +5,15 @@
 	<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
 </head>
 <body>
+	{% extends "Base.html" %}
+	{% block nav %}
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+              <a class="nav-link" href="{{ url_for('.home') }}"> Home </a>
+          </li>
+      </ul>
+  {% endblock %}
+	{% block content %}
 	<div>
 		{% with messages = get_flashed_messages() %}
 		  {% if messages %}
@@ -17,8 +26,8 @@
 		{% endwith %}
 	</div>
 
-	<div id="shopping-cart">
-		<div class="txt-heading">Shopping Cart</div>
+	<div id="shopping-cart" style="margin-top:100px">
+		<div class="txt-heading text-center"><strong><u>Shopping Cart</u></strong></div>
 		{% if session['cart_item']|length > 0  %}
 			<a id="btnEmpty" href="{{ url_for('.empty_cart') }}">Empty Cart</a>
 			<table class="tbl-cart" cellpadding="10" cellspacing="1">
@@ -37,14 +46,14 @@
 					{% set price = session['cart_item'][key]['price'] %}
 					{% set item_price = session['cart_item'][key]['total_price'] %}
 					<tr>
-						<td><img src={{ url_for('static',filename= "session['cart_item'][key]['image']" )}} class="cart-item-image" /></td>
+						<td><img src={{ url_for('static',filename= session['cart_item'][key]['image'] )}} class="cart-item-image" height="180" width="250"/></td>
 						<td>{{ session['cart_item'][key]['title'] }}</td>
 						<td style="text-align:right;">{{ quantity }}</td>
 						<td  style="text-align:right;">₹ {{ price }}</td>
 						<td  style="text-align:right;">₹ {{ item_price }}</td>
 						<td style="text-align:center;">
 							<a href="{{ url_for('.delete_product', pid=session['cart_item'][key]['id']) }}" class="btnRemoveAction">
-								<img src="/static/images/icon-delete.png" alt="Remove Item" />
+								Remove Item
 							</a>
 						</td>
 					</tr>
@@ -56,13 +65,25 @@
 					<td align="right" colspan="2"><strong>₹ {{ session['all_total_price'] }}</strong></td>
 					<td></td>
 				</tr>
+				<tr>
+					<td >
+						<div class="row justify-content-md-end">
+							<form method="POST" action="/checkout">
+								<input type="submit" value="Check Out" class="btn btn-primary" />
+							</form>
+						</div>
+					</td>
+
+				</tr>
 			</tbody>
 			</table>
 
+		</div>
 		{% else: %}
-			<div class="no-records">Your Cart is Empty</div>
+			<div class="no-records text-center mt-5">Your Cart is Empty</div>
 		{% endif %}
-	</div>
 
+
+  {% endblock %}
 </body>
 </html>

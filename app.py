@@ -179,7 +179,7 @@ def empty_cart():
 
 @app.route('/delete/<pid>')
 def delete_product(pid):
-    
+
     try:
         pid=str(pid)
         all_total_price = 0
@@ -208,6 +208,17 @@ def delete_product(pid):
 
 
 
+@app.route('/checkout',methods=['GET', 'POST'])
+def checkout():
+    try:
+        session['cart_item']={}
+        session['all_total_price'] = 0
+        session['all_total_quantity'] = 0
+        return render_template('checkout.html')
+
+    except Exception as e:
+        print(e)
+    return redirect(url_for('.home'))
 
 if __name__ == '__main__':
     app.run(debug=True)

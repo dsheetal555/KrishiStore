@@ -42,7 +42,7 @@
 
           {% for da in itemData %}
                 {% if (da[0]) % 4 == 1 %}
-                <div class="row jumbotron ">
+                <div class="row jumbotron">
                   <br>
                 {% endif %}
                 <div class="col-md-3">
@@ -51,7 +51,7 @@
 							<img src="{{ url_for('static',filename=da[1])}}" class="card-img-top" alt="..." height="180">
 							<div class="card-body text-center">
 								  <h3>{{da[2]}}</h3>
-								  <p class="price">{{da[3]}}</p>
+								  <p class="price">{{da[4]}} {{da[3]}}</p>
 								  <div class="row">
 								  <div class="col">
 								  <input type="submit" value="Add to Cart" class="btnAddAction" />
