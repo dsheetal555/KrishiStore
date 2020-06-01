@@ -28,7 +28,9 @@
 
 	<div id="shopping-cart" style="margin-top:100px">
 		<div class="txt-heading text-center"><strong><u>Shopping Cart</u></strong></div>
+
 		{% if session['cart_item']|length > 0  %}
+	
 			<a id="btnEmpty" href="{{ url_for('.empty_cart') }}">Empty Cart</a>
 			<table class="tbl-cart" cellpadding="10" cellspacing="1">
 			<tbody>

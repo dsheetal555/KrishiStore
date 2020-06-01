@@ -32,12 +32,12 @@
                   </li>
                   <li class="nav-item active">
                       <a class="nav-link" href="{{ url_for('gotocart') }}">
-                        <i class="fas fa-cart-plus"></i> Cart</a>
+                        <i class="fas fa-cart-plus"></i> Cart {{session['cart_item']|length}}</a>
                   </li>
               </ul>
     {% endblock %}
     {% block content %}
-
+    
     <div class="mt-5 container-fluid">
 
           {% for da in itemData %}
